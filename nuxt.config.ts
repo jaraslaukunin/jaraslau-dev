@@ -1,3 +1,5 @@
+import { projects } from './app/data/projects'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
   devtools: { enabled: true },
@@ -7,6 +9,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   app: {
+    // GitHub Pages serves the site from /<repo>/ — set via the deploy
+    // workflow env. Local dev keeps the default root.
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
+
     head: {
       htmlAttrs: {
         lang: 'en',
@@ -40,6 +46,19 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
         },
+      ],
+    },
+  },
+
+  nitro: {
+    prerender: {
+      routes: [
+        '/',
+        '/projects',
+        '/about',
+        '/now',
+        '/uses',
+        ...projects.map((project) => `/projects/${project.slug}`),
       ],
     },
   },

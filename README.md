@@ -52,4 +52,11 @@ Generate a fully static site:
 npm run generate
 ```
 
+## Deploy
+
+The site is deployed to GitHub Pages automatically on every push to
+`master` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+
+https://jaraslaukunin.github.io/jaraslau-dev/
+
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
