@@ -1,0 +1,9 @@
+== A ==
+== NS ==
+jakub.ns.cloudflare.com.
+serenity.ns.cloudflare.com.
+== SOA ==
+jakub.ns.cloudflare.com. dns.cloudflare.com. 2414625731 10000 2400 604800 1800
+== www ==
+== www CNAME ==
+== apex CNAME ==

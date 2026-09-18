@@ -9,8 +9,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   app: {
-    // GitHub Pages serves the site from /<repo>/ — set via the deploy
-    // workflow env. Local dev keeps the default root.
+    // The site lives at the domain root; NUXT_APP_BASE_URL can override
+    // it for sub-path hosting (e.g. GitHub Pages project sites).
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
 
     head: {

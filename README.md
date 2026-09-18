@@ -55,8 +55,11 @@ npm run generate
 ## Deploy
 
 The site is deployed to GitHub Pages automatically on every push to
-`master` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+`main` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
 
-https://jaraslaukunin.github.io/jaraslau-dev/
+https://jaraslau.dev/
+
+Custom domain is configured through the `public/CNAME` file (apex domain,
+A records on Cloudflare pointing to GitHub Pages).
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
