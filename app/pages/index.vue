@@ -44,7 +44,7 @@ import { projects } from '~/data/projects'
             href="mailto:hello@jaraslau.dev"
             class="rounded-md border border-zinc-700 px-4 py-3 text-sm text-zinc-300 transition hover:border-[#a3ff12] hover:text-[#a3ff12]"
         >
-          contact_me()
+          contact_me() hello@jaraslau.dev
         </a>
       </div>
 
