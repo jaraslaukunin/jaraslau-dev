@@ -28,7 +28,7 @@ import { projects } from '~/data/projects'
 
       <p class="relative mt-7 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
         Jaraslau Kunin — software developer from Minsk. I build cross-platform
-        desktop applications and full-stack products with C++, Qt, Vue, Nuxt
+        desktop applications, websites and full-stack products with C++, Qt, Vue, Nuxt
         and Supabase.
       </p>
 
@@ -53,17 +53,17 @@ import { projects } from '~/data/projects'
       >
         <div class="bg-[#111114] p-5">
           <p class="text-[11px] uppercase tracking-wider text-zinc-500">focus</p>
-          <p class="mt-2 text-sm text-zinc-200">Desktop & full stack</p>
+          <p class="mt-2 text-sm text-zinc-200">Web & full stack</p>
         </div>
 
         <div class="bg-[#111114] p-5">
           <p class="text-[11px] uppercase tracking-wider text-zinc-500">core</p>
-          <p class="mt-2 text-sm text-zinc-200">C++ · Qt · Python</p>
+          <p class="mt-2 text-sm text-zinc-200">Python · Go · SQL </p>
         </div>
 
         <div class="bg-[#111114] p-5">
           <p class="text-[11px] uppercase tracking-wider text-zinc-500">currently</p>
-          <p class="mt-2 text-sm text-zinc-200">Vue · Nuxt · Avela</p>
+          <p class="mt-2 text-sm text-zinc-200">Vue · Nuxt · Golang</p>
         </div>
       </div>
     </section>
@@ -98,7 +98,7 @@ import { projects } from '~/data/projects'
       </p>
 
       <p class="mt-5 max-w-3xl text-sm leading-7 text-zinc-300">
-        Currently building <span class="text-[#a3ff12]">Avela</span>, learning
+        Currently building education projects, learning
         modern Vue/Nuxt architecture and turning ideas into useful,
         visually-polished software.
       </p>

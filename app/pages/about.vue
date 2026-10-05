@@ -59,7 +59,7 @@ const skills = [
 
       <div class="bg-[#111114] p-5">
         <p class="text-[11px] uppercase tracking-wider text-zinc-500">focus</p>
-        <p class="mt-2 text-sm text-zinc-200">Desktop & full stack</p>
+        <p class="mt-2 text-sm text-zinc-200">Desktop, Web & full stack</p>
       </div>
     </div>
 
