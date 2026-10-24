@@ -34,6 +34,9 @@ The site is fully static. There is no CMS, database or backend: all content is c
 | `/projects` | The full project archive, rendered from the same data source |
 | `/projects/[slug]` | Case page: type, stack, year, status, role, feature list, repo and site links, language, stars and last update |
 | `/about` | Short bio, location / education / focus panels and a skill list |
+| `/resume` | Career timeline (`git log` style), stack proficiency levels on a 1–10 scale and languages |
+| `/courses` | Completed and in-progress courses, rendered from `app/data/courses.ts` |
+| `/contacts` | Social links (GitHub, LinkedIn, Telegram, Instagram, email) with inline SVG brand icons |
 | `/now` | Current work and learning focus, with an explicit update date |
 | `/uses` | Languages, frameworks, storage, tools and platforms |
 
@@ -126,9 +129,13 @@ tsconfig.json
 
 ## Project Data
 
-`app/data/projects.ts` is the single source of truth for the portfolio. Each entry carries `slug`, `name`, `type`, `description`, `stack`, `status`, `year`, `role`, `features`, `repo`, an optional `site`, `language`, `stars` and `updated`.
+The content lives in JSON files under `app/data/` — `projects.json` (portfolio entries), `profile.json` (socials, stack levels, languages, career, events) and `courses.json`. Thin TypeScript wrappers (`projects.ts`, `profile.ts`, `courses.ts`) add the types. Each project entry carries `slug`, `name`, `type`, `description`, optional `badges` (rendered as `#chips`), `stack`, optional `tools` (kebab-case chips in the team block), `status`, `year`, `role`, `features`, `repo`, an optional `site`, `language`, `stars`, `updated` and a `team` (solo or members with roles; the team lead is highlighted).
 
-`nuxt.config.ts` imports the same array and prerenders `/projects/<slug>` for every entry, so adding a project means adding one object — no extra route file is needed. The current entries are Trackly Site, Avela, Calcify and MRC Schedule.
+`nuxt.config.ts` imports the same array and prerenders `/projects/<slug>` for every entry, so adding a project means adding one object — no extra route file is needed. The current entries mirror every public GitHub repository: Trackly, Moby Family (hackathon), Kvarta Landing, Avela, jaraslau.dev, Burmalda Bot, Trackly Site, MRC Schedule and Calcify.
+
+### Content admin
+
+Run `npm run admin` — an interactive terminal menu to edit content without touching code: list and add projects, add/remove `#badges` and tools, change stack skill levels, add new skills, rebuild the site, and commit & push (the push triggers the Pages deploy automatically).
 
 Repository statistics are committed values, not live data: the site does not call the GitHub API at runtime. Stars and update dates change only when the data file is edited.
 

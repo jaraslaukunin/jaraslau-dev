@@ -1,3 +1,10 @@
+<script setup lang="ts">
+const secondary = [
+  { label: 'now', to: '/now' },
+  { label: 'uses', to: '/uses' },
+]
+</script>
+
 <template>
   <footer class="border-t border-zinc-800">
     <div
@@ -5,12 +12,23 @@
     >
       <p>© {{ new Date().getFullYear() }} Jaraslau Kunin.</p>
 
-      <p class="flex items-center gap-2">
-        <span
-            class="h-2 w-2 rounded-full bg-[#a3ff12] shadow-[0_0_12px_#a3ff12]"
-        />
-        status: building useful things
-      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <NuxtLink
+            v-for="link in secondary"
+            :key="link.to"
+            :to="link.to"
+            class="text-zinc-500 transition hover:text-[#a3ff12]"
+        >
+          ./{{ link.label }}
+        </NuxtLink>
+
+        <p class="flex items-center gap-2">
+          <span
+              class="h-2 w-2 rounded-full bg-[#a3ff12] shadow-[0_0_12px_#a3ff12]"
+          />
+          status: building useful things
+        </p>
+      </div>
     </div>
   </footer>
 </template>

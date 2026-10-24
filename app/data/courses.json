@@ -1,0 +1,11 @@
+[
+  {
+    "title": "Courses & certificates — coming soon",
+    "platform": "todo",
+    "year": "2026",
+    "hours": "—",
+    "status": "in progress",
+    "description": "Placeholder entry — real courses and certificates will be added here later via npm run admin or by editing app/data/courses.json.",
+    "skills": []
+  }
+]

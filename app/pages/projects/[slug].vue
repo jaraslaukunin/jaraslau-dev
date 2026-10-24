@@ -36,7 +36,17 @@ const formatUpdated = (iso: string) => {
     </NuxtLink>
 
     <header class="border-b border-zinc-800 pb-10">
-      <p class="text-xs text-[#a3ff12]">./{{ project.type }}</p>
+      <p class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-[#a3ff12]">./{{ project.type }}</span>
+
+        <span
+            v-for="badge in project.badges ?? []"
+            :key="badge"
+            class="rounded border border-[#a3ff12]/30 bg-[#a3ff12]/[0.06] px-1.5 py-0.5 text-[10px] text-[#a3ff12]/90"
+        >
+            #{{ badge }}
+        </span>
+      </p>
 
       <h1
           class="mt-4 text-4xl font-semibold tracking-[-0.05em] text-zinc-100 sm:text-6xl"
@@ -77,6 +87,22 @@ const formatUpdated = (iso: string) => {
         </div>
 
         <div>
+          <p class="mb-2 text-xs text-zinc-500">TEAM</p>
+          <p
+              class="leading-6"
+              :class="
+                  project.team.size > 1 ? 'text-[#a3ff12]' : 'text-zinc-300'
+              "
+          >
+            {{
+                project.team.size > 1
+                    ? `team of ${project.team.size}`
+                    : 'solo'
+            }}
+          </p>
+        </div>
+
+        <div>
           <p class="mb-2 text-xs text-zinc-500">LINKS</p>
           <div class="space-y-2">
             <a
@@ -113,6 +139,14 @@ const formatUpdated = (iso: string) => {
             {{ feature }}
           </li>
         </ul>
+
+        <div class="mt-12">
+          <h2 class="text-xl font-semibold text-zinc-100">Team.</h2>
+
+          <div class="mt-6 max-w-3xl">
+            <TeamList :team="project.team" :tools="project.tools" />
+          </div>
+        </div>
 
         <div
             class="mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-zinc-800 bg-zinc-800"

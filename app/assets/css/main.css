@@ -83,6 +83,28 @@ a {
     animation: blink 1s steps(2, start) infinite;
 }
 
+.h-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.h-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.h-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.h-scroll::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 3px;
+}
+
+.h-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(163, 255, 18, 0.5);
+}
+
 @keyframes blink {
     50% {
         opacity: 0;

@@ -7,23 +7,34 @@ useSeoMeta({
 const categories = [
   {
     title: 'languages',
-    items: ['C++', 'Python', 'Java', 'Kotlin', 'SQL'],
+    items: ['c++', 'python', 'typescript', 'java', 'kotlin', 'sql'],
   },
   {
     title: 'frameworks',
-    items: ['Qt 6', 'Django', 'Vue', 'Nuxt', 'Kivy'],
+    items: ['qt-6', 'django', 'vue', 'nuxt', 'kivy', 'react-native'],
   },
   {
     title: 'storage',
-    items: ['PostgreSQL', 'MySQL', 'SQLite', 'Supabase'],
+    items: ['postgresql', 'mysql', 'sqlite', 'supabase'],
   },
   {
     title: 'tools',
-    items: ['Qt Creator', 'PyCharm', 'VS Code', 'Xcode', 'Git', 'GitHub'],
+    items: [
+      'qt-creator',
+      'jetbrains-pycharm',
+      'vscode',
+      'xcode',
+      'git',
+      'github',
+      'github-actions',
+      'docker',
+      'buildozer',
+      'npm',
+    ],
   },
   {
     title: 'platform',
-    items: ['macOS', 'iOS', 'Android'],
+    items: ['macos', 'ios', 'android'],
   },
 ]
 </script>

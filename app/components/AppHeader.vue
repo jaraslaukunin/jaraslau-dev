@@ -4,8 +4,9 @@ const route = useRoute()
 const links = [
   { label: 'projects', to: '/projects' },
   { label: 'about', to: '/about' },
-  { label: 'now', to: '/now' },
-  { label: 'uses', to: '/uses' },
+  { label: 'resume', to: '/resume' },
+  { label: 'courses', to: '/courses' },
+  { label: 'contacts', to: '/contacts' },
 ]
 
 const isActive = (to: string) => {

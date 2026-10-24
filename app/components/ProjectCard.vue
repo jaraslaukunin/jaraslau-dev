@@ -21,6 +21,16 @@ const formatUpdated = (iso: string) => {
         <h3 class="text-lg font-semibold text-zinc-100 group-hover:text-[#a3ff12]">
           {{ project.name }}
         </h3>
+
+        <div v-if="project.badges?.length" class="mt-2 flex flex-wrap gap-1.5">
+          <span
+              v-for="badge in project.badges"
+              :key="badge"
+              class="rounded border border-[#a3ff12]/30 bg-[#a3ff12]/[0.06] px-1.5 py-0.5 text-[10px] text-[#a3ff12]/90"
+          >
+            #{{ badge }}
+          </span>
+        </div>
       </div>
 
       <span
@@ -50,6 +60,19 @@ const formatUpdated = (iso: string) => {
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-500">
         <span class="text-zinc-400">★ {{ project.stars }}</span>
         <span>{{ project.language }}</span>
+        <span
+            :class="
+                project.team.size > 1
+                    ? 'text-[#a3ff12]'
+                    : 'text-zinc-400'
+            "
+        >
+          {{
+              project.team.size > 1
+                  ? `team · ${project.team.size}`
+                  : 'solo'
+          }}
+        </span>
         <span>updated {{ formatUpdated(project.updated) }}</span>
       </div>
 

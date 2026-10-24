@@ -32,6 +32,14 @@ import { projects } from '~/data/projects'
         and Supabase.
       </p>
 
+      <div class="relative mt-6 flex items-center gap-2 text-xs text-zinc-400">
+        <span
+            class="h-2 w-2 rounded-full bg-[#a3ff12] shadow-[0_0_12px_#a3ff12]"
+        />
+        open_to_work = <span class="text-[#a3ff12]">true</span>
+        <span class="text-zinc-600">// looking for internship since sep 2026</span>
+      </div>
+
       <div class="relative mt-9 flex flex-wrap gap-3">
         <a
             href="#projects"
@@ -39,6 +47,13 @@ import { projects } from '~/data/projects'
         >
           view_projects()
         </a>
+
+        <NuxtLink
+            to="/resume"
+            class="rounded-md border border-zinc-700 px-4 py-3 text-sm text-zinc-300 transition hover:border-[#a3ff12] hover:text-[#a3ff12]"
+        >
+          cat_resume()
+        </NuxtLink>
 
         <a
             href="mailto:hello@jaraslau.dev"
@@ -68,31 +83,86 @@ import { projects } from '~/data/projects'
       </div>
     </section>
 
-    <section id="projects" class="py-16 sm:py-20">
-      <div class="mb-8">
-        <p class="text-xs text-[#a3ff12]">
-          <span class="text-zinc-500">~/jaraslau</span> $ ls ./projects --featured
-        </p>
+    <section id="projects" class="border-b border-zinc-800 py-16 sm:py-20">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs text-[#a3ff12]">
+            <span class="text-zinc-500">~/jaraslau</span> $ ls ./projects --featured
+          </p>
 
-        <h2 class="mt-4 text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
-          Selected work.
-        </h2>
+          <h2 class="mt-4 text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
+            Selected work.
+          </h2>
 
-        <p class="mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
-          A few products I have designed, developed and continue to improve.
-        </p>
+          <p class="mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
+            Products I have designed, developed and continue to improve — solo
+            and in teams.
+          </p>
+        </div>
+
+        <NuxtLink
+            to="/projects"
+            class="text-xs text-zinc-500 transition hover:text-[#a3ff12]"
+        >
+          all_projects() →
+        </NuxtLink>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2">
-        <ProjectCard
-            v-for="project in projects"
-            :key="project.slug"
-            :project="project"
-        />
+      <div class="-mx-5 snap-x snap-mandatory overflow-x-auto px-5 pb-4 pt-3 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10 h-scroll">
+        <div class="flex w-max gap-4">
+          <ProjectCard
+              v-for="project in projects"
+              :key="project.slug"
+              :project="project"
+              class="w-[85vw] max-w-[420px] shrink-0 snap-start"
+          />
+        </div>
       </div>
+
+      <p class="mt-1 text-xs text-zinc-600">→ scroll for more</p>
     </section>
 
-    <section class="terminal-card mb-8 rounded-xl p-6 sm:p-8">
+    <section class="border-b border-zinc-800 py-16 sm:py-20">
+      <p class="text-xs text-[#a3ff12]">
+        <span class="text-zinc-500">~/jaraslau</span> $ ./stack --levels
+      </p>
+
+      <div class="mb-8 mt-4 flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
+          Stack.
+        </h2>
+
+        <p class="text-xs text-zinc-500">self-assessed, 1–10</p>
+      </div>
+
+      <StackLevels />
+    </section>
+
+    <section class="border-b border-zinc-800 py-16 sm:py-20">
+      <p class="text-xs text-[#a3ff12]">
+        <span class="text-zinc-500">~/jaraslau</span> $ git log --career
+      </p>
+
+      <h2 class="mb-8 mt-4 text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
+        Career.
+      </h2>
+
+      <CareerLog />
+    </section>
+
+    <section class="border-b border-zinc-800 py-16 sm:py-20">
+      <p class="text-xs text-[#a3ff12]">
+        <span class="text-zinc-500">~/jaraslau</span> $ locale -a
+      </p>
+
+      <h2 class="mb-8 mt-4 text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
+        Languages.
+      </h2>
+
+      <LanguagesPanel />
+    </section>
+
+    <section class="terminal-card mt-8 rounded-xl p-6 sm:p-8">
       <p class="text-xs text-[#a3ff12]">
         <span class="text-zinc-500">~/jaraslau</span> $ cat now.txt
       </p>
@@ -102,6 +172,13 @@ import { projects } from '~/data/projects'
         modern Vue/Nuxt architecture and turning ideas into useful,
         visually-polished software.
       </p>
+
+      <NuxtLink
+          to="/now"
+          class="mt-5 inline-block text-xs text-[#a3ff12] transition hover:underline"
+      >
+        read_more() →
+      </NuxtLink>
     </section>
   </main>
 </template>
