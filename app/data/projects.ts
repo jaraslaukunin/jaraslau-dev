@@ -11,6 +11,9 @@ export type Project = {
     tools?: string[]
     status: 'completed' | 'in progress' | 'open source'
     year: string
+    started?: string
+    ended?: string
+    ongoing?: boolean
     role: string
     features: string[]
     repo: string

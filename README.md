@@ -135,7 +135,7 @@ The content lives in JSON files under `app/data/` — `projects.json` (portfolio
 
 ### Content admin
 
-Run `npm run admin` — an interactive terminal menu to edit content without touching code: list and add projects, add/remove `#badges` and tools, change stack skill levels, add new skills, rebuild the site, and commit & push (the push triggers the Pages deploy automatically).
+Run `npm run admin` — an interactive terminal menu to edit content without touching code: list and add projects (with life periods — a single date, a range, or an ongoing `now` status), add events, add/remove `#badges` and tools, change stack skill levels, add new skills, rebuild the site, and commit & push (the push triggers the Pages deploy automatically). Timeline ordering is automatic everywhere: newest first in life shows first on the site, older entries shift right/down.
 
 Repository statistics are committed values, not live data: the site does not call the GitHub API at runtime. Stars and update dates change only when the data file is edited.
 

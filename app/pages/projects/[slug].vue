@@ -72,8 +72,13 @@ const formatUpdated = (iso: string) => {
     <div class="grid gap-10 py-12 lg:grid-cols-[0.9fr_1.6fr]">
       <aside class="space-y-7 text-sm">
         <div>
-          <p class="mb-2 text-xs text-zinc-500">YEAR</p>
-          <p class="text-zinc-200">{{ project.year }}</p>
+          <p class="mb-2 text-xs text-zinc-500">PERIOD</p>
+          <p
+              class="leading-6"
+              :class="project.ongoing ? 'text-[#a3ff12]' : 'text-zinc-200'"
+          >
+            {{ periodLabel(project) }}
+          </p>
         </div>
 
         <div>

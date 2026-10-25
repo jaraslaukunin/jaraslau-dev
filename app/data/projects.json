@@ -40,7 +40,9 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026",
+    "ended": "2026"
   },
   {
     "slug": "moby-family",
@@ -98,7 +100,9 @@
           "role": "economy, law analysis, economic report and privacy policy docs"
         }
       ]
-    }
+    },
+    "started": "2026-10",
+    "ended": "2026-10"
   },
   {
     "slug": "kvarta-landing",
@@ -139,7 +143,9 @@
     "tools": [
       "deepseek-harness",
       "jetbrains-webstorm-community"
-    ]
+    ],
+    "started": "2026-10",
+    "ended": "2026-10"
   },
   {
     "slug": "avela",
@@ -180,7 +186,9 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026-09",
+    "ongoing": true
   },
   {
     "slug": "jaraslau-dev",
@@ -217,7 +225,9 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026-09",
+    "ongoing": true
   },
   {
     "slug": "burmalda",
@@ -252,7 +262,9 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026-09",
+    "ongoing": true
   },
   {
     "slug": "trackly-site",
@@ -291,7 +303,9 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026-05",
+    "ongoing": true
   },
   {
     "slug": "mrc-schedule",
@@ -330,7 +344,9 @@
           "url": "https://github.com/ma1nr"
         }
       ]
-    }
+    },
+    "started": "2025",
+    "ended": "2026"
   },
   {
     "slug": "calcify",
@@ -365,6 +381,8 @@
           "lead": true
         }
       ]
-    }
+    },
+    "started": "2026-06",
+    "ended": "2026"
   }
 ]

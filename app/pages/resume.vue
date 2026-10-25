@@ -8,10 +8,31 @@ useSeoMeta({
 })
 
 const formatEventDate = (iso: string) => {
-  const [year, month] = iso.split('-')
-  const date = new Date(Number(year), Number(month) - 1, 1)
-  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  const [year, month = '1', day] = iso.split('-').map(Number)
+  const date = new Date(year, month - 1, day ?? 1)
+  return day
+      ? date.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+        })
+      : date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
 }
+
+const eventPeriod = (event: (typeof events)[number]) => {
+  if (event.ongoing) return `${formatEventDate(event.date)} — now`
+  if (event.ended && event.ended !== event.date) {
+      return `${formatEventDate(event.date)} — ${formatEventDate(event.ended)}`
+  }
+  return formatEventDate(event.date)
+}
+
+// newest first in life = first on the page
+const sortedEvents = [...events].sort((a, b) => {
+    const key = (e: (typeof events)[number]) =>
+        e.ongoing ? '9999-99' : (e.ended ?? e.date)
+    return key(b).localeCompare(key(a))
+})
 </script>
 
 <template>
@@ -49,13 +70,15 @@ const formatEventDate = (iso: string) => {
 
       <div class="mt-6 grid gap-4 lg:grid-cols-2">
         <div
-            v-for="event in events"
+            v-for="event in sortedEvents"
             :key="event.name"
             class="terminal-card rounded-xl p-6"
         >
           <div class="flex items-start justify-between gap-4">
             <div>
-              <p class="text-xs text-[#a3ff12]">{{ formatEventDate(event.date) }}</p>
+              <p class="text-xs text-[#a3ff12]">
+                {{ eventPeriod(event) }}
+              </p>
 
               <h3 class="mt-2 text-lg font-semibold text-zinc-100">
                 {{ event.name }}

@@ -73,6 +73,9 @@ const formatUpdated = (iso: string) => {
                   : 'solo'
           }}
         </span>
+        <span :class="project.ongoing ? 'text-[#a3ff12]' : ''">
+          {{ periodLabel(project) }}
+        </span>
         <span>updated {{ formatUpdated(project.updated) }}</span>
       </div>
 

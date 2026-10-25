@@ -19,13 +19,9 @@ const sortedProjects = computed(() => {
   const list = [...projects]
 
   if (activeSort.value === 'recent') {
-    list.sort(
-        (a, b) =>
-            b.updated.localeCompare(a.updated) ||
-            b.year.localeCompare(a.year),
-    )
+    list.sort(byPeriodDesc)
   } else if (activeSort.value === 'year') {
-    list.sort((a, b) => b.year.localeCompare(a.year))
+    list.sort((a, b) => periodStartKey(b).localeCompare(periodStartKey(a)))
   } else if (activeSort.value === 'name') {
     list.sort((a, b) => a.name.localeCompare(b.name))
   } else if (activeSort.value === 'team') {

@@ -5,6 +5,9 @@ useSeoMeta({
       'Personal website of Jaraslau Kunin — developer building cross-platform desktop and full-stack products.',
 })
 import { projects } from '~/data/projects'
+
+// newest first in life = first in the strip; older projects shift right
+const timeline = [...projects].sort(byPeriodDesc)
 </script>
 
 <template>
@@ -111,7 +114,7 @@ import { projects } from '~/data/projects'
       <div class="-mx-5 snap-x snap-mandatory overflow-x-auto px-5 pb-4 pt-3 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10 h-scroll">
         <div class="flex w-max gap-4">
           <ProjectCard
-              v-for="project in projects"
+              v-for="project in timeline"
               :key="project.slug"
               :project="project"
               class="w-[85vw] max-w-[420px] shrink-0 snap-start"

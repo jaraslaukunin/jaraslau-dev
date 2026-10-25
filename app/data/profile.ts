@@ -37,7 +37,9 @@ export type CareerEntry = {
 
 export type EventEntry = {
     name: string
-    date: string
+    date: string // YYYY-MM (or YYYY-MM-DD for day precision)
+    ended?: string
+    ongoing?: boolean
     place: string
     result?: string
     description: string

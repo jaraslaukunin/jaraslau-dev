@@ -66,6 +66,18 @@ const kebab = (value) =>
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '')
 
+const DATE_RE = /^\d{4}(-\d{2}){0,2}$/
+
+const askDate = async (question, fallback) => {
+    for (;;) {
+        const value = await ask(question, fallback)
+        // empty answer = no date given — allowed for optional fields
+        if (value === '' || DATE_RE.test(value)) return value
+        if (inputClosed) return ''
+        console.log(`  ${MUTED}! expected YYYY, YYYY-MM or YYYY-MM-DD${RESET}`)
+    }
+}
+
 const printHeader = (title) =>
     console.log(`\n${MUTED}~/jaraslau-dev $${RESET} ${ACCENT}${title}${RESET}`)
 
@@ -82,8 +94,30 @@ const listProjects = () => {
     return projects
 }
 
+// Asks for a life period: single point, a range, or "now" (ongoing).
+// Months are preferred (YYYY-MM); a plain year works too.
+const askPeriod = async () => {
+    const started = await askDate('Start (YYYY-MM preferred, or just YYYY)')
+    if (!started) return { started: String(new Date().getFullYear()) }
+
+    const answer = await ask(
+        'End (YYYY-MM, "now" = still going, empty = single point)',
+        '',
+    )
+    if (answer.toLowerCase() === 'now') return { started, ongoing: true }
+    if (!answer) return { started }
+    const ended = await askDate('End', '')
+    return ended ? { started, ended } : { started }
+}
+
 const buildTeam = async () => {
-    const mode = await ask('Team: 1 = solo, 2 = enter members', '1')
+    let mode
+    for (;;) {
+        mode = await ask('Team: 1 = solo, 2 = enter members', '1')
+        if (mode === '1' || mode === '2') break
+        if (inputClosed) { mode = '1'; break }
+        console.log(`  ${MUTED}! enter 1 or 2${RESET}`)
+    }
     if (mode === '1') {
         const role = await ask('Your role in the project', 'design, architecture, development')
         return {
@@ -133,7 +167,7 @@ const addProject = async () => {
     const stackRaw = await ask('Stack, comma-separated (e.g. "Python, Django")')
     const toolsRaw = await ask('Tools, comma-separated, kebab-case (e.g. "jetbrains-pycharm, docker")', '')
     const status = await ask('Status: completed / in progress / open source', 'completed')
-    const year = await ask('Year', String(new Date().getFullYear()))
+    const period = await askPeriod()
     const role = await ask('Your role')
     const repo = await ask('Repo URL')
     const site = await ask('Site URL', '')
@@ -159,7 +193,8 @@ const addProject = async () => {
         status: ['completed', 'in progress', 'open source'].includes(status)
             ? status
             : 'completed',
-        year,
+        year: period.started.slice(0, 4),
+        ...period,
         role,
         features,
         repo,
@@ -286,6 +321,49 @@ const addStackSkill = async () => {
     }
 }
 
+const addEvent = async () => {
+    const profile = load(PROFILE_FILE)
+    printHeader('add ./events/new')
+
+    const name = await ask('Event name (e.g. "Space Hackathon with MTbank 4.0")')
+    if (!name) return console.log('  ! empty name')
+
+    const date = await askDate('Start date (YYYY-MM preferred, YYYY-MM-DD if a day matters)')
+    if (!date) return console.log('  ! empty date')
+
+    const ongoing =
+        (await ask('Still going? y/N', 'n')).toLowerCase() === 'y'
+    let ended
+    if (!ongoing) {
+        const endAnswer = await askDate(
+            'End date (YYYY-MM, empty = single point)',
+            '',
+        )
+        if (endAnswer && endAnswer !== date) ended = endAnswer
+    }
+
+    const place = await ask('Place (e.g. "Minsk")', '')
+    const result = await ask('Result / placing (empty = none)', '')
+    const description = await ask('Description')
+    const url = await ask('Link (repo / event page)', '')
+
+    const team = await buildTeam()
+
+    const event = { name, date, place, description, team }
+    if (ongoing) event.ongoing = true
+    if (ended) event.ended = ended
+    if (result) event.result = result
+    if (url) event.url = url
+
+    profile.events.unshift(event)
+    profile.events.sort((a, b) => {
+        const key = (e) => (e.ongoing ? '9999-99' : (e.ended ?? e.date))
+        return key(b).localeCompare(key(a))
+    })
+    save(PROFILE_FILE, profile)
+    console.log(`  ${ACCENT}✔ "${name}" added (${profile.events.length} events, newest first)${RESET}`)
+}
+
 const commitAndPush = async () => {
     printHeader('git add app/data && git commit && git push')
     const message = await ask('Commit message', 'content: update portfolio data')
@@ -308,11 +386,11 @@ const MENU = `
 
 ${BOLD}jaraslau.dev admin${RESET} ${MUTED}— edit content without touching code${RESET}
 
-  1. list projects          5. edit stack levels
-  2. add project            6. add stack skill
-  3. edit project badges    7. commit & push
-  4. edit project tools     8. rebuild site (npm run generate)
-  0. exit`
+  1. list projects          6. add stack skill
+  2. add project            7. add event
+  3. edit project badges    8. commit & push
+  4. edit project tools     9. rebuild site (npm run generate)
+  5. edit stack levels      0. exit`
 
 const main = async () => {
     console.log(MENU)
@@ -327,8 +405,9 @@ const main = async () => {
             else if (choice === '4') await editProjectTools()
             else if (choice === '5') await editStackLevels()
             else if (choice === '6') await addStackSkill()
-            else if (choice === '7') await commitAndPush()
-            else if (choice === '8') {
+            else if (choice === '7') await addEvent()
+            else if (choice === '8') await commitAndPush()
+            else if (choice === '9') {
                 printHeader('npm run generate')
                 const result = spawnSync('npm', ['run', 'generate'], { cwd: ROOT, stdio: 'inherit' })
                 if (result.status === 0) console.log(`  ${ACCENT}✔ site rebuilt into .output/public${RESET}`)
